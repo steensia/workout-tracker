@@ -7,9 +7,10 @@
   "workouts": [
     {
       "id": 1,
-      "date": "2018-8-4",
-      "type": "bike",
-      "distance": "101"
+      "date": "2018-8-16",
+      "type": "run",
+      "distance": "101",
+      "rating": null
     },
     {
       "id": 2,
@@ -49,18 +50,6 @@
       "date": "2018-9-1",
       "distance": "2000",
       "id": 8
-    },
-    {
-      "type": "row",
-      "date": "2018-10-15",
-      "distance": "101",
-      "id": 9
-    },
-    {
-      "type": "row",
-      "date": "2019-9-13",
-      "distance": "321",
-      "id": 10
     }
   ],
   "locations": [

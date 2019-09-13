@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { WorkoutsAPIService } from '../services/workouts-api.service';
 import * as _ from 'lodash';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-workouts',
@@ -11,7 +12,7 @@ export class WorkoutsComponent implements OnInit {
   public workouts = [];
   public loading = false;
 
-  constructor(private api: WorkoutsAPIService) { }
+  constructor(private api: WorkoutsAPIService, private modal: NgbModal) { }
 
   ngOnInit() {
     this.loading = true;
@@ -21,8 +22,9 @@ export class WorkoutsComponent implements OnInit {
     })
   }
 
-  deleteWorkout(id){
-    this.api.deleteWorkout(id).subscribe(data => _.remove(this.workouts, { id: id}));
+  deleteWorkout(id, deleteModal){
+    this.modal.open(deleteModal).result.then(result =>{
+      this.api.deleteWorkout(id).subscribe(data => _.remove(this.workouts, { id: id}));
+    }, reason => console.log(`Dismissed: ${reason}`));
   }
-
 }
