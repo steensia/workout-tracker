@@ -49,6 +49,18 @@
       "date": "2018-9-1",
       "distance": "2000",
       "id": 8
+    },
+    {
+      "type": "row",
+      "date": "2018-10-15",
+      "distance": "101",
+      "id": 9
+    },
+    {
+      "type": "row",
+      "date": "2019-9-13",
+      "distance": "321",
+      "id": 10
     }
   ],
   "locations": [

@@ -37,24 +37,24 @@ export class WorkoutsAPIService {
     }
   }
 
-  // deleteWorkout(id) {
-  //   return this.http.delete(`${this.baseUrl}/workouts/${id}`);
-  // }
+  deleteWorkout(id) {
+    return this.http.delete(`${this.baseUrl}/workouts/${id}`);
+  }
 
-  // getLocations() {
-  //   return this.http.get<any[]>(`${this.baseUrl}/locations`);
-  // }
+  getLocations() {
+    return this.http.get<any[]>(`${this.baseUrl}/locations`);
+  }
 
-  // searchLocations(searchTerm) {
-  //   return this.http.get<any[]>(`${this.baseUrl}/locations?q=${searchTerm}`);
-  // }
+  searchLocations(searchTerm) {
+    return this.http.get<any[]>(`${this.baseUrl}/locations?q=${searchTerm}`);
+  }
 
-  // getPerfTargets() {
-  //   return this.http.get(`${this.baseUrl}/performanceTargets`);
-  // }
+  getPerfTargets() {
+    return this.http.get(`${this.baseUrl}/performanceTargets`);
+  }
   
-  // savePerfTargets(perfTargets: any){
-  //   return this.http.put(`${this.baseUrl}/performanceTargets`, perfTargets);
-  // }
+  savePerfTargets(perfTargets: any){
+    return this.http.put(`${this.baseUrl}/performanceTargets`, perfTargets);
+  }
 
 }
