@@ -1,8 +1,8 @@
 {
   "performanceTargets": {
-    "bike": "800",
-    "run": "120",
-    "row": "150"
+    "bike": "7000",
+    "run": "1000",
+    "row": "1000"
   },
   "workouts": [
     {

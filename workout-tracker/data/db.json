@@ -1,16 +1,16 @@
 {
   "performanceTargets": {
-    "bike": "1001",
+    "bike": "1000",
     "run": "2201",
-    "row": "1501"
+    "row": "1500"
   },
   "workouts": [
     {
       "id": 1,
       "date": "2018-8-16",
       "type": "run",
-      "distance": "101",
-      "rating": null
+      "distance": "141",
+      "rating": 0
     },
     {
       "id": 2,
@@ -27,9 +27,9 @@
     {
       "type": "run",
       "date": "2018-8-31",
-      "distance": "120",
+      "distance": "2000",
       "id": 5,
-      "rating": null
+      "rating": 0
     },
     {
       "type": "row",
@@ -40,9 +40,10 @@
     },
     {
       "date": "2018-9-21",
-      "distance": "21",
+      "distance": "101",
       "id": 7,
-      "type": "run"
+      "type": "bike",
+      "rating": null
     }
   ],
   "locations": [

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { WorkoutsAPIService } from '../services/workouts-api.service';
 import { NgbDateStruct, NgbDate } from '@ng-bootstrap/ng-bootstrap';
@@ -9,7 +9,8 @@ import * as _ from 'lodash';
 @Component({
   selector: 'app-entry-editor',
   templateUrl: './entry-editor.component.html',
-  styleUrls: ['./entry-editor.component.css']
+  styleUrls: ['./entry-editor.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class EntryEditorComponent implements OnInit {
   public workout: any = {};
@@ -68,5 +69,9 @@ export class EntryEditorComponent implements OnInit {
       this.loading = false;
       this.nav.navigate(['/workouts']);
     })
+  }
+
+  popVisibilityChange(pop){
+    console.log(`Popover open state: ${pop.isOpen()}`);
   }
 }

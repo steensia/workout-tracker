@@ -13,7 +13,7 @@ export class WorkoutsAPIService {
     return this.http.get<any[]>(`${this.baseUrl}/workouts`);
   }
 
-  getWorkoutsPaged(currPage, pageSize) {
+  getWorkoutsPaged(currPage, pageSize){
     return this.http.get<any[]>(`${this.baseUrl}/workouts?_page=${currPage}&_limit=${pageSize}`);
   }
 

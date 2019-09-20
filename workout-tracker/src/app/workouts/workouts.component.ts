@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { WorkoutsAPIService } from '../services/workouts-api.service';
 import * as _ from 'lodash';
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
@@ -8,25 +8,38 @@ import { PerformanceTargetsModalComponent } from '../performance-targets-modal/p
 @Component({
   selector: 'app-workouts',
   templateUrl: './workouts.component.html',
-  styleUrls: ['./workouts.component.css']
+  styleUrls: ['./workouts.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class WorkoutsComponent implements OnInit {
   public workouts = [];
+  // public workoutsOrig = [];
   public loading = false;
   public perfTargets = {}; 
+  public totals = {};
+  public pageSize = 5;
+  public currPage = 1;
 
   constructor(private api: WorkoutsAPIService, private modal: NgbModal) { }
 
   ngOnInit() {
     forkJoin(
-      this.api.getWorkouts(),
+      this.api.getWorkoutsPaged(this.currPage, this.pageSize),
       this.api.getPerfTargets()
     ).subscribe(([workoutsResult, perfTargetsResult]) =>{
       this.workouts = workoutsResult;
       this.perfTargets = perfTargetsResult;
+      this.calculatePerformance();
       this.loading = false;
       console.log('**workouts', this.workouts, this.perfTargets);
     });
+  }
+
+  refreshGrid() {
+    // let offset = (this.currPage - 1) * this.pageSize;
+    // this.workouts = _.drop(this.workoutsOrig, offset).slice(0, this.pageSize);
+
+    this.api.getWorkoutsPaged(this.currPage, this.pageSize).subscribe(data => this.workouts = data);
   }
 
   deleteWorkout(id, deleteModal){
@@ -49,5 +62,27 @@ export class WorkoutsComponent implements OnInit {
     }, reason => {
       console.log(`Dimissed reason: ${reason}`);
     });
+  }
+
+  calculatePerformance() {
+    let bikeTotal = _.chain(this.workouts).filter(x => x.type == 'bike').sumBy(x => +x.distance).value();
+    let rowTotal = _.chain(this.workouts).filter(x => x.type == 'row').sumBy(x => +x.distance).value();
+    let runTotal = _.chain(this.workouts).filter(x => x.type == 'run').sumBy(x => +x.distance).value();
+    this.totals = { bike: bikeTotal, row: rowTotal, run: runTotal };
+    console.log('**totals', this.totals);
+  }
+
+  getPBType(total: number, target: number) {
+    let pct = (total / target) * 100;
+
+    if (pct <= 25) {
+      return 'success';
+    } else if (pct > 25 && pct <= 50){
+      return 'info'
+    } else if (pct > 50 && pct <= 75){
+      return 'warning';
+    } else if ( pct > 75) {
+      return 'danger'
+    }
   }
 }

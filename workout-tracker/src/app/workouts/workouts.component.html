@@ -3,7 +3,7 @@
 
     <div class="card">
         <div class="card-header">
-            <h4 class="card-title">Workouts</h4>            
+            <h2 class="card-title">Workouts</h2>            
         </div>
         <div class="card-body">
             <button class="btn btn-sm btn-primary mr-2" (click)="showPerfTargets()">Set Performance Targets</button>
@@ -19,17 +19,44 @@
                 </div>
             </div>
 
-            <!-- TODO: Progress bar here -->
-
+            <hr>
+            <p><ngb-progressbar [value]="totals.bike" [max]="perfTargets.bike" height="20px" striped="true" animated="true"
+                    [type]="getPBType(totals.bike, perfTargets.bike)">
+                (Bike) {{totals.bike}} of {{perfTargets.bike}}
+            </ngb-progressbar></p>
+            <p><ngb-progressbar [value]="totals.row" [max]="perfTargets.row" height="20px" striped="true" animated="true"
+                    [type]="getPBType(totals.row, perfTargets.row)">
+                (Row) {{totals.row}} of {{perfTargets.row}}
+            </ngb-progressbar></p>
+            <p><ngb-progressbar [value]="totals.run" [max]="perfTargets.run" height="20px" striped="true" animated="true"
+                    [type]="getPBType(totals.run, perfTargets.run)">
+                (Run) {{totals.run}} of {{perfTargets.run}}
+            </ngb-progressbar></p>
         </div>
     </div>
 
     <div class="card">
         <h3 class="card-header">
             Workout Entries
-            <a [routerLink]="['/workouts', 'new']" class="btn btn-sm btn-primary float-right">Add New Entry</a>
+            <a [routerLink]="['/workouts', 'new']" class="btn btn-sm btn-primary float-right"
+                [ngbTooltip]="ttContent" placement="left" tooltipClass="custom-tooltip">Add New Entry</a>
+            <ng-template #ttContent>
+                Log a new <strong class="text-primary text-uppercase">workout</strong> into your list
+            </ng-template>
+
+            <!-- <button class="btn btn-success" ngbTooltip="This is just a test" triggers="manual"
+                    #t="ngbTooltip" (click)="t.open()" [autoClose]="'inside'">
+                Tooltip Test
+            </button> -->
         </h3>
         <div class="card-body">
+
+            <div class="row">
+                <div class="col">
+                    <ngb-pagination [collectionSize]="50" boundaryLinks="true"
+                        [pageSize]="pageSize" maxSize="5" rotate="true" [(page)]="currPage" (pageChange)="refreshGrid()"></ngb-pagination>
+                </div>
+            </div>
 
             <table class="table table-striped">
                 <thead>
